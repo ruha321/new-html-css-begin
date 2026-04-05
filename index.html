@@ -1,0 +1,1762 @@
+<!doctype html>
+<!-- DOCTYPE宣言は大文字小文字混在でもいいが基本小文字
+     現代のwebには必ずつける 付けないと古い仕様のwebページと解釈される -->
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Paiza: 新・HTML/CSS入門編まとめメモ</title>
+    <link href="./src/style.css" rel="stylesheet" />
+    <meta name="keywords" content="html,css,web">
+    <meta name="description" content="html/cssの個人的学習メモ">
+    <meta name="viewpost" content="width=device-width initial-scale=1">
+    <style>
+        #inner-css>h1 {
+            color: red;
+        }
+
+        #inner-css>p {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Paiza: 新・HTML/CSS入門編まとめメモ</h1>
+        <nav>
+            <ul class="header-navigation">
+                <li><a href="#sectioning-contents">セクショニングコンテンツ</a></li>
+                <li><a href="#grouping-contents">グルーピングコンテンツ</a></li>
+                <li>
+                    <a href="#text-level-semantics">
+                        テキストレベルセマンティクス
+                    </a>
+                </li>
+                <li><a href="#attribute">属性</a></li>
+                <li><a href="#metadata">メタデータ</a></li>
+                <li><a href="#css">CSS</a></li>
+                <li><a href="#selector">セレクタ</a></li>
+                <li><a href="#media-query">メディアクエリ</a></li>
+                <li><a href="#box-model">ボックスモデル</a></li>
+                <li><a href="#box-layout">ボックスレイアウト</a></li>
+                <li><a href="#box-advanced-settings">ボックスの細かい設定</a></li>
+                <li><a href="#flexbox">フレキシブルボックスレイアウト</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article id="sectioning-contents">
+            <h1>セクショニングコンテンツ</h1>
+            <section>
+                <h2>h1~h6要素</h2>
+                <p>見出しを表す．数字の順番に重要度がある．</p>
+            </section>
+            <section>
+                <h2>article要素</h2>
+                <p>自己完結したセクションを表す．</p>
+                <p>明示的にアウトラインを生成する．</p>
+            </section>
+            <section>
+                <h2>nav要素</h2>
+                <p>ページのナビゲーションを表す．</p>
+                <p>
+                    セクションとして扱われるため，明示的にアウトラインを生成する．
+                </p>
+            </section>
+            <section>
+                <h2>aside要素</h2>
+                <p>
+                    補足情報を表すセクション．リーダーモードだと見えなくなる
+                </p>
+            </section>
+            <section>
+                <h2>section要素</h2>
+                <p>
+                    汎用セクションを表す．決まったセクションで表せないときに使う
+                </p>
+            </section>
+            <section>
+                <h2>header要素</h2>
+                <p>ページの導入的なコンテンツを表す．</p>
+                ヘッダーには
+                <ul>
+                    <li>ページの見出し</li>
+                    <li>ナビゲーション</li>
+                    <li>ロゴ</li>
+                    <li>検索フォーム</li>
+                </ul>
+                などが含まれる．
+                <aside>
+                    セクショニングコンテンツではないため，アウトラインを生成することは無い．
+                </aside>
+            </section>
+            <section>
+                <h2>footer要素</h2>
+                フッターには，
+                <ul>
+                    <li>関連記事</li>
+                    <li>SNSのリンク</li>
+                    <li>著者情報</li>
+                    <li>著作権情報</li>
+                </ul>
+                などが含まれる．
+                <aside>
+                    footer要素は直近の祖先セクショニングコンテンツまたはセクショニング・ルート要素に対するフッターとなる．
+                </aside>
+            </section>
+        </article>
+        <article id="grouping-contents">
+            <h1>グルーピングコンテンツ</h1>
+            <section>
+                <h2>p要素</h2>
+                <p>段落を表す</p>
+            </section>
+            <section>
+                <h2>hr要素</h2>
+                <p>段落レベルの主題区切りを表す．</p>
+                <p>横棒を引くためだけに使ってはいけない．</p>
+            </section>
+            <section>
+                <h2>pre要素</h2>
+                <p>要素内のテキストのレイアウトが保存される</p>
+                <p>つまり，空白文字がそのまま適用される</p>
+            </section>
+            <section>
+                <h2>ul要素</h2>
+                <p>順序なしリストを表す．</p>
+                <ul>
+                    <li>項目a</li>
+                    <ul>
+                        <li>項目A</li>
+                        <li>項目B</li>
+                        <li>項目C</li>
+                    </ul>
+                    <li>項目b</li>
+                    <li>項目c</li>
+                </ul>
+            </section>
+            <section>
+                <h2>ol要素</h2>
+                <p>順序付きリストを表す．</p>
+                <ol>
+                    <li>リストタイプ１</li>
+                    <ol start="10" reversed>
+                        <li>項目10</li>
+                        <li>項目9</li>
+                        <li>項目8</li>
+                    </ol>
+                    <li>リストタイプa</li>
+                    <ol type="a">
+                        <li>項目a</li>
+                        <li>項目b</li>
+                        <li>項目c</li>
+                    </ol>
+                    <li>リストタイプI</li>
+                    <ol type="I">
+                        <li>項目１</li>
+                        <li>項目２</li>
+                        <li>項目３</li>
+                    </ol>
+                </ol>
+            </section>
+            <section>
+                <h2>main要素</h2>
+                <p>ヘッダーやフッターじゃないメインコンテンツを表す要素</p>
+                <p>articleを囲う使い方を多用しそうな所感</p>
+            </section>
+            <section>
+                <h2>div要素</h2>
+                <p>汎用コンテナ用</p>
+                <p>スタイルとかに使いやすい</p>
+            </section>
+        </article>
+        <article id="text-level-semantics">
+            <h1>テキストレベルセマンティクス</h1>
+            <section>
+                <h2>br要素</h2>
+                <pre>&lt;br&gt;</pre>
+            </section>
+            <section>
+                <h2>time要素</h2>
+                <pre><code>&lt;time datetime="yyyy-mm-dd"&gt;&lt;/time&gt;</code></pre>
+                <time datetime="2026-03-28">勉強した日付2026年3月28日</time>
+            </section>
+            <section>
+                <h2>small要素</h2>
+                <p>注釈用に文字を小さくする スタイリングのために使わない</p>
+                例
+                <ul>
+                    <li>免責事項</li>
+                    <li>警告</li>
+                    <li>法的制約</li>
+                    <li>著作権</li>
+                </ul>
+                <pre><code>&lt;small&gt;&copy;2022 Paiza, Inc.&lt;/small&gt;</code></pre>
+                <small>&copy;2022 Paiza, Inc.</small>
+            </section>
+            <section>
+                <h2>span要素</h2>
+                <p>divと同じ汎用コンテナ</p>
+                <p>divは新しい行から始めるがspanは行内に含められるタイプ</p>
+                <pre>
+                    <code>
+&lt;p&gt;これは&lt;span class=&quot;pen&quot;&gt;ペン&lt;/span&gt;です&lt;/p&gt;</code></pre>
+                <p>
+                    これは<span style="color: white; background-color: black">ペン</span>です
+                </p>
+            </section>
+            <section>
+                <h2>a要素</h2>
+                <pre>
+                    <code>
+&lt;a href="#text-level-semantics"&gt;テキストレベルセマンティクス&lt;/a&gt;</code></pre>
+                <a href="#text-level-semantics">
+                    テキストレベルセマンティクス
+                </a>
+            </section>
+        </article>
+        <article id="attribute">
+            <h1>属性</h1>
+            <section>
+                <h2>lang属性</h2>
+                <p>そのタグ以降の言語を指定するグローバル属性．</p>
+                <p>引用符(&lt;q&gt;タグ)の見た目や，ブラウザの翻訳に影響する</p>
+                <div lang="en">
+                    <q>Hello</q>
+                </div>
+                <div lang="de">
+                    <q>Hello</q>
+                </div>
+                <div lang="it">
+                    <q>Hello</q>
+                </div>
+                <div lang="ja">
+                    <q>Hello</q>
+                </div>
+            </section>
+            <section>
+                <h2>title属性</h2>
+                <p>そのタグの補足情報を付けられるグローバル属性．</p>
+                <p title="タイトル属性">マウスオーバーで見れる．</p>
+            </section>
+            <section>
+                <h2>class属性</h2>
+                <p>クラス名を指定するグローバル属性．</p>
+                <p>要素分類やスタイルに使う．</p>
+                <p>半角スペース区切りで複数のクラス名を指定できる．</p>
+                <pre>
+                    <code>
+                        &lt;div class="a1 a2"&gt;
+                            abc
+                        &lt;/div&gt;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>id属性</h2>
+                <p>要素に固有の名前を指定するグローバル属性．</p>
+                <p>ページ内リンクやスタイルに使う．</p>
+                <p>固有なので同じ属性値は使えない．</p>
+                <p>複数指定も不可．</p>
+                <p>スタイルの適用優先順位がclassより高い</p>
+                <pre>
+                    <code>
+                        &lt;p id="hello"&gt;
+                            Hello
+                        &lt;/p&gt;
+                    </code>
+                </pre>
+            </section>
+        </article>
+        <article id="metadata">
+            <h1>メタデータ</h1>
+            <p>head要素に指定する．</p>
+            <section>
+                <h2>title要素</h2>
+                <p>ページのタイトル．ブラウザの窓の名前になる．</p>
+                <p>テキストのみ，中のタグはすべて無視</p>
+                <p>head要素は一つのtitle要素を持つ</p>
+            </section>
+            <section>
+                <h2>meta要素</h2>
+                <ul>
+                    <li>charset属性: エンコードの種類</li>
+                    <li>name属性: 文書レベルのメタデータを定義</li>
+                    <li>http-equiv属性: httpヘッダと同等の情報を明示</li>
+                    <li>itemprop属性</li>
+                </ul>
+                <p>charset属性以外はcontent属性を書く必要がある</p>
+            </section>
+            <section>
+                <h2>charset属性</h2>
+                <p>ページで使われるエンコードを指定．</p>
+            </section>
+            <section>
+                <h2>name属性とcontent属性</h2>
+                <p>文書のメタデータを（名前，値）の組で与える</p>
+                <pre><code>&lt;meta name="keywords" content="html,css,web"&gt;</code></pre>
+            </section>
+            <section>
+                <h2>description</h2>
+                <p>検索エンジンがページ概要を表示するのに使用</p>
+                <pre><code>&lt;meta name="description" content="html/cssの個人的学習メモ"&gt;</code></pre>
+            </section>
+            <section>
+                <h2>ビューポート</h2>
+                <p>webページを表示する領域．</p>
+                <p>ビューポートの大きさはそれぞれの環境依存．</p>
+                <p>指定するとモバイルデバイスのビューポートを指定できる．</p>
+                <p>「initial-scale=1」と「width=device-width」は同じ定義だが、ブラウザの幅を画面幅に合わせる場合は、ブラウザの自動縮小を防ぐために両方を属性値に入れたほうがよい．</p>
+                <pre><code>&lt;meta name="viewpost" content="width=device-width initial-scale=1"&gt;</code></pre>
+            </section>
+            <section>
+                <h2>リンク要素</h2>
+                <ul>
+                    <li>href属性: 外部リソースのURL</li>
+                    <li>rel属性: hrefの値とこの文書の関係を表すリンクタイプ</li>
+                </ul>
+                主なrel属性の属性値
+                <ul>
+                    <li>alternate: 翻訳ページの代替文書を示す</li>
+                    <li>stylesheet: 外部スタイルシートを示す</li>
+                    <li>prev: 前のページであることを示す</li>
+                    <li>next: 後のページであることを示す</li>
+                    <li>prev: ヘルプやFAQページを示す</li>
+                </ul>
+            </section>
+        </article>
+        <article id="css">
+            <h1>CSS</h1>
+            <section>
+                <h2>CSSの構成要素</h2>
+                <ul>
+                    <li>セレクタ</li>
+                    <li>プロパティ</li>
+                    <li>値</li>
+                </ul>
+                で構成される．
+                <h2>プロパティの種類</h2>
+                <ul>
+                    <li>color</li>
+                    <li>font-size</li>
+                    <li>background-color</li>
+                </ul>
+                などがある
+            </section>
+            <section>
+                <h2>内部スタイルシート</h2>
+                <p>head要素内にstyle要素のコンテンツとして記述したもの</p>
+                <p>部分優先指定ならあり</p>
+                <pre>
+<code>
+    &lt;style&gt;
+        #inner-css > h1 {
+            color: red;
+        }
+        #inner-css > p {
+            color: blue;
+        }
+    &lt;/style&gt;
+</code>
+                </pre>
+                <div id="inner-css">
+                    <h1>Hello</h1>
+                    <p>world</p>
+                </div>
+            </section>
+            <section>
+                <h2>インラインスタイルシート</h2>
+                <p>style属性を使ったCSSの設定</p>
+                <p>テスト用って感じ</p>
+                <p>なくても意味的に同じでなくてはならない</p>
+            </section>
+            <section>
+                <h2>外部スタイルシート</h2>
+                <p>複数に適応できてメンテナンス性が高い</p>
+            </section>
+            <section>
+                <h2>CSSの文字コード指定</h2>
+                <p>先頭に<q>@charset &quot;文字コード&quot;</q>を書く</p>
+                <p>コメントは<q>/* */</q>で囲む</p>
+            </section>
+            <section>
+                <h2>宣言のグループ化</h2>
+                <p>プロパティと値のセットを宣言という</p>
+                <p>宣言とセレクタを合わせてルールという</p>
+                <p>宣言は同じセレクタを指定しても，別のルールとして記述可能</p>
+                <pre>
+                    <code>
+                    h1 {
+                        color: red;
+                        background-color: blue;
+                    }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>値の継承</h2>
+                <p>継承プロパティと非継承プロパティが存在する</p>
+                <p>継承プロパティでは値が設定されていない場合，親要素の値を継承して設定される</p>
+            </section>
+            <section>
+                <h2>優先順位</h2>
+                <p>同じ宣言で同じプロパティの宣言は基本的に後のものが優先処理される</p>
+            </section>
+        </article>
+        <article id="selector">
+            <h1>セレクタ</h1>
+            <section>
+                <h2>タイプセレクタ</h2>
+                <p>要素に対するセレクタ</p>
+                <pre>
+                    <code>
+                    p {color: red;}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>クラスセレクタ</h2>
+                <p>特定のクラスを対象にするセレクタ</p>
+                <pre>
+                    <code>
+                    .fruit {color: red;}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>IDセレクタ</h2>
+                <p>特定のIDを対象にするセレクタ</p>
+                <p>#で指定する</p>
+                <pre>
+                    <code>
+                    #apple {color: red;}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>属性セレクタ</h2>
+                <p>指定した属性，属性値を対象にするセレクタ</p>
+                <p>[]で囲って記述する</p>
+                <pre>
+                    <code>
+                    div[lang="ja"] {color: red;}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>構造疑似クラス</h2>
+                <p>コードに存在する要素をカウント</p>
+                <p>特定の番目の要素だけにCSSを適用するクラス</p>
+                <p>同階層の全要素をカウントする<q>-child</q>疑似クラス</p>
+                <p>特定の要素のみカウントする<q>-of-type</q>疑似クラス</p>
+                <pre>
+                    <code>
+                    p:last-child {color: red;}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>ダイナミック疑似クラス</h2>
+                <p>htmlとはかかわりのない状態へのcss</p>
+                <ul>
+                    <li>:link疑似クラス：未訪問リンク</li>
+                    <li>:visited：訪問済みリンク</li>
+                    <li>:hover：ホバー状態</li>
+                    <li>:active：クリックしてからアクセスされる間</li>
+                </ul>
+                <pre>
+                    <code>
+                        p:hover {
+                            color: white;
+                            background-color: blue;
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>::before/::after疑似要素</h2>
+                <p>適用先のコンテンツの前・後に仮想的なボックスを挿入できる要素</p>
+                <p>そのボックスの中身はcontentで文字や画像を指定可能</p>
+                <pre>
+                    <code>
+                        p::before {
+                            content: "・";
+                        }
+                    </code>
+                </pre>
+                <p class="center-point">中点付き段落</p>
+            </section>
+            <section>
+                <h2>混合セレクタ</h2>
+                <p>複数のセレクタを指定したセレクタ</p>
+                <p>セレクタ間にスペースを入れずにつなげて記述する</p>
+                <p>クラス名や擬似クラスは複数つなげて記述できるが、要素名とすべての要素を指定するユニバーサルセレクタは最初に1つだけ記述できる。</p>
+                <p>擬似要素は最後に1つだけ記述することができる。</p>
+                <pre>
+                    <code>
+                        p.programming-language:nth-of-type(2n)::after {content: " おすすめ!";}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>子孫セレクタ</h2>
+                <p>あるドキュメントの階層の下にあるドキュメントの指定</p>
+                <p>二つのセレクタの間に半角スペースを空けて記述</p>
+                <pre>
+                    <code>
+                        div p::before {content: "・";}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>兄弟セレクタ</h2>
+                <p>あるドキュメントと同じ階層にあるドキュメントを指定</p>
+                <p>+ か ~を間に入れる</p>
+                <ul>
+                    <li>+: 隣接</li>
+                    <li>~: 間接</li>
+                </ul>
+                <pre>
+                    <code>
+                        div + p::before {content: "・";}
+                        div ~ p::before {content: "*";}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>セレクタリスト</h2>
+                <p>セレクタをカンマで区切って複数指定</p>
+                <p>結合子系も全然可</p>
+                <pre>
+                    <code>
+                        h1, p {color: red;}
+                    </code>
+                </pre>
+            </section>
+        </article>
+        <article id="media-query">
+            <h1>メディアクエリ</h1>
+            <p>出力デバイスの特性や種類を判別してCSSを適用するための記述</p>
+            <section>
+                <h2>レスポンシブWebデザイン</h2>
+                <p>メディアクエリを利用して，画面サイズの異なるデバイスにデザインを最適化する手法</p>
+                <pre>
+                    <code>
+                        @media (min-width: 960px) {
+                            p {color:blue;}
+                    }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>複数条件の適用</h2>
+                <p>"and"か","(or)で複数してできる</p>
+                <pre>
+                    <code>
+                        @media (min-width: 600px) and (max-width: 900px){
+                            p {color: blue;}
+                        }
+                        @media (max-width: 600px) , (min-width: 900px){
+                            p {color: blue;}
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>メディアタイプの指定</h2>
+                <p>スタイルをどのメディアに適応するか</p>
+                <ul>
+                    <li>all</li>
+                    <li>print</li>
+                    <li>screen</li>
+                </ul>
+                <pre>
+                    <code>
+                        @media print and (min-width: 500px) {
+                            p {color: blue;}
+                        }
+                    </code>
+                </pre>
+            </section>
+        </article>
+        <article id="box-model">
+            <h1>ボックスモデル</h1>
+            <p>レイアウトをコントロールするための構造</p>
+            <p>各要素をボックスモデルに基づいた長方形のボックスとして表現</p>
+            <section>
+                <h2>マージン</h2>
+                <p>ボックスモデルの一番外側の余白</p>
+                <p>背景色が追加されない</p>
+                <p>上下マージンにのみマージンの重ね合わせが起きる</p>
+                <pre>
+                    <code>
+                        .fruit {
+                            margin: 50px;
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>マージンの個別指定</h2>
+                <p>上下左右のマージンはそれぞれ個別に指定できる</p>
+                <ul>
+                    <li>margin-top</li>
+                    <li>margin-bottom</li>
+                    <li>margin-left</li>
+                    <li>margin-right</li>
+                </ul>
+                <pre>
+                    <code>
+                    margin: 上 右 下 左;
+                    margin: 上 左右 下;
+                    margin: 上下 左右;
+                    h2 {
+                        margin: 40px 20px 5px 60px;
+                        background-color: yellow;
+                    }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>ボーダー</h2>
+                <p>ボーダーのスタイル太さ，色を指定できる</p>
+                <p>値を各順番は何でもいい</p>
+                <ul>
+                    <li>border-style</li>
+                    <ul>
+                        <li>solid</li>
+                        <li>dotted</li>
+                        <li>dashed</li>
+                        <li>double</li>
+                        <li>none</li>
+                    </ul>
+                    <li>border-width</li>
+                    <li>border-color</li>
+                </ul>
+                <p>ボーダーもマージンみたいな個別指定ができる</p>
+                <pre>
+                    <code>
+                        .border1 {
+                            margin: 40px;
+                            border: solid 5px red;
+                            background-color: yellow;
+                        }
+                        .border2 {
+                            margin: 40px;
+                            border-style: dotted;
+                            border-width: 5px;
+                            border-color: blue;
+                            background-color: yellow;
+                        }
+                        .border3 {
+                            margin: 40px;
+                            border-bottom: solid 5px red;
+                            background-color: yellow;
+                        }
+                    </code>
+                </pre>
+                <div class="border1">
+                    <p>ボーダー1: 一括指定</p>
+                </div>
+                <div class="border2">
+                    <p>ボーダー2：スタイルの個別指定</p>
+                </div>
+                <div class="border3">
+                    <p>ボーダー3：位置の個別指定</p>
+                </div>
+            </section>
+            <section>
+                <h2>パディング</h2>
+                <p>ボーダーとコンテンツ間の余白</p>
+                <p>背景色が適用される</p>
+                <p>個別指定できる</p>
+                <pre>
+                    <code>
+                        .padding1 {
+                            margin: 40px;
+                            border: solid 5px red;
+                            padding: 40px;
+                            background-color: yellow;
+                        }
+                        .padding2 {
+                            margin: 40px;
+                            border: solid 5px red;
+                            padding-top: 40px;
+                            padding-right: 20px;
+                            padding-bottom: 5px;
+                            padding-left: 60px;
+                            background-color: yellow;
+                        }
+                    </code>
+                </pre>
+                <div class="padding1">
+                    <p>パディング1: パディング例</p>
+                </div>
+                <div class="padding2">
+                    <p>パディング2: 上下左右個別指定</p>
+                </div>
+            </section>
+            <section>
+                <h2>ボックスの横幅と高さ</h2>
+                <p>widthとheightで指定</p>
+                <p>初期状態はauto</p>
+                <pre>
+                    <code>
+                        .box-hw {
+                            width: 100px;
+                            height: 400px;
+                            background-color: yellow;
+                        }
+                    </code>
+                </pre>
+                <div class="box-hw">
+                    <p>ボックスの横幅と高さはそれぞれ<br>&quot;width&quot;と<br>&quot;height&quot;で変更できます．</p>
+                    <p>初期値は&quot;auto&quot;となっており，画面のサイズやデバイスの種類などによって自動的に決定されます．</p>
+                </div>
+            </section>
+            <section>
+                <h2>ビューポートパーセンテージ</h2>
+                <p>ビューポートのサイズを基にパーセンテージで表す単位</p>
+                <p>レスポンシブデザイン向き</p>
+                <ul>
+                    <li>vw: viewportの横幅に対する割合</li>
+                    <li>vh: viewportの高さに対する割合</li>
+                    <li>vmin: viewportの横幅と高さの内小さいほうに対する割合</li>
+                    <li>vmax: viewportの横幅と高さの内大きいほうに対する割合</li>
+                </ul>
+                <pre>
+                    <code>
+                        .vp-percent {
+                            width: 30vw;
+                            height: 10vh;
+                            background-color: yellow;
+                        }
+                    </code>
+                </pre>
+                <div class="vp-percent">
+                    <p>ビューポートパーセンテージを使用して横幅と高さを指定した例</p>
+                </div>
+            </section>
+            <section>
+                <h2>コンテンツの横幅の高さと最大値と最小値</h2>
+                <ul>
+                    <li>min-width</li>
+                    <li>max-width</li>
+                    <li>min-height</li>
+                    <li>max-height</li>
+                </ul>
+                <pre>
+                    <code>
+                        .max-width {
+                            max-width: 800px;
+                            background-color: yellow;
+                        }
+                    </code>
+                </pre>
+                <div class="max-width">
+                    <h3>コンテンツ幅の最大値を指定する</h3>
+                    <p>max-widthプロパティを用いてコンテンツ幅の最大値を指定する</p>
+                </div>
+            </section>
+        </article>
+        <article id="box-layout">
+            <h1>ボックスレイアウト</h1>
+            <nav>
+                <ul>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                    <li><a href="#display">displayプロパティ</a></li>
+                </ul>
+            </nav>
+            <section id="display">
+                <h2>displayプロパティ</h2>
+                <p>要素の表示形式を指定する</p>
+                <p>要素ごとに初期値が決まっている</p>
+                <table>
+                    <caption>
+                        displeyプロパティの初期値例
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>display</th>
+                            <th>要素</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                block
+                            </th>
+                            <td>div, p</td>
+                        </tr>
+                        <tr>
+                            <th>inline</th>
+                            <td>a, span</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>displayの種類</p>
+                <ul>
+                    <li>block</li>
+                    <li>inline</li>
+                    <li>inline-block</li>
+                    <li>flex</li>
+                    <li>grid</li>
+                    <li>table</li>
+                    <li>none</li>
+                </ul>
+            </section>
+            <section id="block">
+                <h2>block</h2>
+                <p>ブラウザ画面や親要素に合わせた横幅になる</p>
+                <p>上から下に表示される</p>
+                <p>heightやwidthで調整可能</p>
+                <p>widthで短くしても，後続のブロックは横並びにはならない</p>
+                <pre>
+                    <code>
+                        span.box {
+                            display: block;
+                            width: 300px;
+                            height: 50px;
+                        }
+                    </code>
+                </pre>
+                <span class="box box_1">ボックス1</span>
+                <span class="box box_2">ボックス2</span>
+                <span class="box box_3">ボックス3</span>
+            </section>
+            <section id="inline">
+                <h2>inline</h2>
+                <p>ボックス内のコンテンツに合わせた横幅になって横並べ表示される</p>
+                <p>heightやwidthは機能しない</p>
+                <p>テキストと同じ扱いで改行は無視されて空白になる</p>
+                <pre>
+                    <code>
+                        div.box {
+                            display: inline;
+                        }
+                    </code>
+                </pre>
+                <div class="box box_1">ボックス1</div>
+                <div class="box box_2">ボックス2</div>
+                <div class="box box_3">ボックス3</div>
+            </section>
+            <section id="inline-block">
+                <h2>inline-block</h2>
+                <p>インラインの性質を残したブロック</p>
+                <p>heightやwidthで調整可能</p>
+                <p>widthで調整しないと，横幅はインライン</p>
+                <p>インラインの性質によってボックスの区切りでは改行されない</p>
+                <pre>
+                    <code>
+                        .box.inline-block {
+                            display: inline-block;
+                            width: 200px;
+                            height: 70px;
+                            background-color: aqua;
+                        }
+                    </code>
+                </pre>
+                <div>
+                    インラインの中に
+                    <span class="box inline-block">ブロックを</span>挿入するためには、<br>
+                    「inline-block」をdisplayプロパティの値として指定する必要があります
+                </div>
+            </section>
+            <section id="displey-none">
+                <h2>displey:none;</h2>
+                <p>指定するとその要素と子孫要素が表示されなくなる</p>
+                <p>メディアクエリと組み合わせてデバイスの画面の大きさによって出したり消したりすることが多い</p>
+            </section>
+            <section id="float">
+                <h2>float</h2>
+                <p>floatの値として&quot;left&quot;または&quot;right&quot;を指定すると左寄せまたは右寄せで配置するフローレイアウトを実現する</p>
+                <p>フローティングボックスは通常よりも前面のボックス</p>
+                <p>他のレイヤーのボックスと重なるが，他のコンテンツとは重ならない</p>
+                <p>flortを指定したボックスが続く場合，インラインボックスのような配置になる</p>
+                <pre>
+                    <code>
+                        .float.box_1 {
+                            float: left;
+                            height: 100px;
+                            background-color: aqua;
+                        }
+                        .float.box_2 {
+                            float: left;
+                            height: 60px;
+                            background-color: yellow;
+                        }
+                        .float.box_3 {
+                            height: 60px;
+                            background-color: silver;
+                        }
+                    </code>
+                </pre>
+                <div class="float box_1">ボックス1</div>
+                <div class="float box_2">ボックス2</div>
+                <div class="float box_3">ボックス3</div>
+            </section>
+            <section id="position">
+                <h2>positionボックス</h2>
+                <p>positionで作成される</p>
+                <p>他のボックスと重なった場合，そのボックスのコンテンツは隠れる</p>
+                <p>positionと物理プロパティで位置を変えれる</p>
+                <table>
+                    <caption>positionの値</caption>
+                    <thead>
+                        <tr>
+                            <th>プロパティの値</th>
+                            <td>意味</td>
+                            <td>absoluteの基準親ボックスになるか</td>
+                            <td>物理プロパティが適用されるか</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>relative</th>
+                            <td>プロパティを設定しない場合の表示位置を基準に相対的に配置</td>
+                            <td>なる</td>
+                            <td>適用される</td>
+                        </tr>
+                        <tr>
+                            <th>absolute</th>
+                            <td>ブラウザ画面か親ボックスの左上を基準に絶対的に配置</td>
+                            <td>ならない</td>
+                            <td>適用される</td>
+                        </tr>
+                        <tr>
+                            <th>fixed</th>
+                            <td>ブラウザ画面を基準として配置 スクロールしても位置が変わらない</td>
+                            <td>なる</td>
+                            <td>適用される</td>
+                        </tr>
+                        <tr>
+                            <th>static</th>
+                            <td>文書の流れに沿って配置</td>
+                            <td>ならない</td>
+                            <td>適用されない</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>物理プロパティの値</p>
+                <ul>
+                    <li>top</li>
+                    <li>bottom</li>
+                    <li>left</li>
+                    <li>right</li>
+                </ul>
+                <pre>
+                        <code>
+                            .box.position {
+                                height: 50px;
+                                background-color: #00ff00;
+                                position: relative;
+                            }
+                            .box_sub.static {
+                                color: #ff0000;
+                                position: static;
+                                top: 10px;
+                                left: 10px;
+                            }
+                            .box_sub.relative {
+                                color: #ff0000;
+                                position: relative;
+                                top: 10px;
+                                left: 10px;
+                            }
+                            .box_sub.absolute {
+                                color: #ff0000;
+                                position: absolute;
+                                top: 10px;
+                                left: 10px;
+                            }
+                            .box_sub.fixed {
+                                color: #ff0000;
+                                position: fixed;
+                                top: 10px;
+                                left: 10px;
+                            }
+                    </code>
+                </pre>
+                <div class="contents">
+                    <p class="box position">ボックス<span class="box_sub static">ポジションボックスの表示</span></p>
+                </div>
+                <div class="contents">
+                    <p class="box position">ボックス<span class="box_sub relative">ポジションボックスの表示</span></p>
+                </div>
+                <div class="contents">
+                    <p class="box position">ボックス<span class="box_sub absolute">ポジションボックスの表示</span></p>
+                </div>
+                <div class="contents">
+                    <p class="box position">ボックス<span class="box_sub fixed">ポジションボックスの表示</span></p>
+                </div>
+            </section>
+            <section id="z-index">
+                <h2>z-index</h2>
+                <p>positionでstatic以外の時のボックスの重なり順を指定できる</p>
+                <p>デフォルトは0, 大きい数字ほど上に載る</p>
+                <p>同じなら後が上</p>
+                <p>autoの場合，親ボックスと同じ値で初期値</p>
+                <pre>
+                    <code>
+                        .box_1.z-index {
+                            z-index: 1;
+                        }
+                    </code>
+                </pre>
+                <div class="contents z-index">
+                    <div class="box_1 z-index">ボックス1</div>
+                    <div class="box_2 z-index">ボックス2</div>
+                    <div class="box_3 z-index">ボックス3</div>
+                </div>
+            </section>
+        </article>
+        <article id="box-advanced-settings">
+            <h1>ボックスの細かい設定</h1>
+            <nav>
+                <ul>
+                    <li><a href="#overflow">overflow</a></li>
+                    <li><a href="#virtual-box-content">仮想的なボックスのコンテンツ(content)</a></li>
+                    <li><a href="#opacity">ボックスの不透明度(opacity)</a></li>
+                    <li><a href="#mouse-cursor">マウスカーソルを変更する(cursor)</a></li>
+                    <li><a href="#box-outline">ボックスのアウトラインの変更(outline)</a></li>
+                    <li><a href="#border-radius">ボックスボーダーの角を丸くする(border-radius)</a></li>
+                    <li><a href="#border-radius-individual">ボックスの角丸を個別に設定</a></li>
+                    <li><a href="#box-shadow">ボックスのボーダーに影を付ける(box-shadow)</a></li>
+                </ul>
+            </nav>
+            <section id="overflow">
+                <h2>overflow</h2>
+                <p>コンテンツの量によるオーバーフロー</p>
+                <p>オーバーフロー時の表示を設定できる</p>
+                <p>overflow-x overflow-yで縦横個別指定できる</p>
+                <table>
+                    <caption>overflowプロパティの主な値</caption>
+                    <thead>
+                        <tr>
+                            <th>値</th>
+                            <td>説明</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>visible</th>
+                            <td>そのまま縦に表示</td>
+                        </tr>
+                        <tr>
+                            <th>hidden</th>
+                            <td>あふれた分は隠す</td>
+                        </tr>
+                        <tr>
+                            <th>scroll</th>
+                            <td>スクロールで閲覧可能に</td>
+                        </tr>
+                        <tr>
+                            <th>auto</th>
+                            <td>ブラウザの大きさによって自動でスクロールできるか決定</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pre>
+                    <code>
+                        .lipsum.visible {
+                            overflow: visible;
+                        }
+                        .lipsum.hidden {
+                            overflow: hidden;
+                        }
+                        .lipsum.scroll {
+                            overflow: scroll;
+                        }
+                        .lipsum.auto {
+                            overflow: auto;
+                        }
+                    </code>
+                </pre>
+                <div id="overflow-contents">
+                    <div class="lipsum scroll">
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
+                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
+                            Latin words, consectetur from a Lorem Ipsum passage, and going through the cites of the word
+                            in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections
+                            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                            Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular
+                            during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
+                            from a line in section 1.10.32.
+                        </p>
+                    </div>
+                    <div class="lipsum auto">
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
+                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
+                            Latin words, consectetur from a Lorem Ipsum passage, and going through the cites of the word
+                            in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections
+                            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                            Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular
+                            during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
+                            from a line in section 1.10.32.
+                        </p>
+                    </div>
+                    <div class="lipsum visible">
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
+                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
+                            Latin words, consectetur from a Lorem Ipsum passage, and going through the cites of the word
+                            in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections
+                            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                            Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular
+                            during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
+                            from a line in section 1.10.32.
+                        </p>
+                    </div>
+                    <div class="lipsum hidden">
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                            of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
+                            a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
+                            Latin words, consectetur from a Lorem Ipsum passage, and going through the cites of the word
+                            in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections
+                            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                            Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular
+                            during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
+                            from a line in section 1.10.32.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section id="virtual-box-content">
+                <h2>仮想的なボックスのコンテンツ(content)</h2>
+                <p>contentプロパティ</p>
+                <ul>
+                    <li>open-quot</li>
+                    <li>close-quot</li>
+                    <li>counter()</li>
+                    <ul>
+                        <li>counter-reset</li>
+                        <li>counter-increment</li>
+                    </ul>
+                </ul>
+                <pre>
+                    <code>
+                        .virtual p::before {
+                            content: "・";
+                        }
+                        .quote p::before {
+                            content: open-quote;
+                        }
+                        .quote p::after {
+                            content: close-quote;
+                        }
+                        div.counter {
+                            counter-reset: job;
+                        }
+                        .counter p::before {
+                            content: counter(job);
+                            counter-increment: job;
+                        }
+                    </code>
+                </pre>
+                <div class="virtual">
+                    <p>スポーツ選手</p>
+                    <p>YouTuber</p>
+                    <p>警察官</p>
+                </div>
+                <div class="quote">
+                    <p>スポーツ選手</p>
+                    <p>YouTuber</p>
+                    <p>警察官</p>
+                </div>
+                <div class="counter">
+                    <p>スポーツ選手</p>
+                    <p>YouTuber</p>
+                    <p>警察官</p>
+                </div>
+            </section>
+            <section id="opacity">
+                <h2>ボックスの不透明度(opacity)</h2>
+                <p>1は完全に不透明，0は完全に透明</p>
+                <pre>
+                    <code>
+                        .box_1.opacity {
+                            opacity: 1;
+                            position: relative;
+                            background-color: aqua;
+                        }
+                        .box_2.opacity {
+                            opacity: 0.5;
+                            position: absolute;
+                            left: 30px;
+                            top: 30px;
+                            background-color: yellow;
+                        }
+                        .box_3.opacity {
+                            opacity: 0;
+                            position: absolute;
+                            left: 60px;
+                            top: 60px;
+                            background-color: silver;
+                        }
+                    </code>
+                </pre>
+                <div class="contents opacity">
+                    <div class="box_1 opacity">ボックス1</div>
+                    <div class="box_2 opacity">ボックス2</div>
+                    <div class="box_3 opacity">ボックス3</div>
+                </div>
+            </section>
+            <section id="mouse-cursor">
+                <h2>マウスカーソルを変更する(cursor)</h2>
+                <p>ボックスにカーソルを重ねた時の形状</p>
+                <p>初期値はauto</p>
+                <ul>
+                    <li>auto</li>
+                    <li>default</li>
+                    <li>none</li>
+                    <li>pointer</li>
+                    <li>wait</li>
+                    <li>text</li>
+                    <li>not-allowed</li>
+                </ul>
+                <pre>
+                    <code>
+                        .box_1.cursor {
+                            cursor: text;
+                        }
+                        .box_2.cursor {
+                            cursor: pointer;
+                        }
+                        .box_3.cursor {
+                            cursor: none;
+                        }
+                        .box_4.cursor {
+                            cursor: wait;
+                        }
+                        .box_5.cursor {
+                            cursor: not-allowed;
+                        }
+                        .box_6.cursor {
+                            cursor: default;
+                        }
+                    </code>
+                <div class="contents cursor">
+                    <div class="box_1 cursor">ボックス1</div>
+                    <div class="box_2 cursor">ボックス2</div>
+                    <div class="box_3 cursor">ボックス3</div>
+                    <div class="box_4 cursor">ボックス4</div>
+                    <div class="box_5 cursor">ボックス5</div>
+                    <div class="box_6 cursor">ボックス6</div>
+                </div>
+            </section>
+            <section id="box-outline">
+                <h2>ボックスのアウトラインの変更(outline)</h2>
+                <p>ボーダーの外側に，アウトラインを表示</p>
+                <p>上下左右の個別設定は不可</p>
+                <p>要素のボーダーの種類，太さ，色を調整できる</p>
+                <p>設定方法はボーダーと大体同じ</p>
+                <pre>
+                    <code>
+                        div.outline1 {
+                            outline: dotted 5px red;
+                        }
+                        div.outline2 {
+                            outline-width: 5px;
+                            outline-style: solid;
+                            outline-color: green;
+                        }
+                    </code>
+                </pre>
+                <div class="outline outline1">
+                    ボックスのアウトライン設定1
+                </div>
+                <div class="outline outline2">
+                    ボックスのアウトライン設定1
+                </div>
+            </section>
+            <section id="border-radius">
+                <h2>ボックスボーダーの角を丸くする(border-radius)</h2>
+                <p>border-radiusでボーダーの外側の角を丸くする</p>
+                <p>値には角丸の半径をpx単位などで指定</p>
+                <pre>
+                    <code>
+                        .border-radius {
+                            border-radius: 20px;
+                        }
+                    </code>
+                </pre>
+                <div class="border-radius">
+                    角丸ボックスの生成
+                </div>
+            </section>
+            <section id="border-radius-individual">
+                <h2>ボックスの角丸を個別に設定</h2>
+                <ul>
+                    <li>border-top-left-radius</li>
+                    <li>border-top-right-radius</li>
+                    <li>border-bottom-left-radius</li>
+                    <li>border-bottom-right-radius</li>
+                </ul>
+                <p>border-radiusで個別指定するときは<span class="reminder">時計回りと対角線</span></p>
+                <pre>
+                    <code>
+                        div.border-xxx-xxx-radius {
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 20px;
+                            border-bottom-left-radius: 30px;
+                            border-bottom-right-radius: 40px;
+                            background-color: red;
+                        }
+
+                        div.border-radius-individual {
+                            border-radius: 40px 30px 20px 10px;
+                        }
+                    </code>
+                </pre>
+                <div class="border-radius2 border-xxx-xxx-radius">
+                    角丸ボックスの個別指定
+                </div>
+                <div class="border-radius2 border-radius-individual">
+                    角丸ボックスの個別指定
+                </div>
+            </section>
+            <section id="box-shadow">
+                <h2>ボックスのボーダーに影を付ける(box-shadow)</h2>
+                <p>box-shadowでボーダーの外側にドロップシャドウをつける</p>
+                <p>影の形や大きさは標準では適応するボックスと同じ</p>
+                <p>値には二つから四つの長さと影の色や内側用のinsetがある</p>
+                <ol>
+                    <li>横方向の影のずれ幅</li>
+                    <li>縦方向の影のずれ幅</li>
+                    <li>輪郭をぼかす大きさを示すブラー</li>
+                    <li>影の大きさを拡張するスプレッド</li>
+                </ol>
+                <pre>
+                    <code>
+                        .shadow {
+                            box-shadow: 20px 20px gray;
+                        }
+                        .shadow-inset {
+                            box-shadow: 20px 20px gray inset;
+                        }
+                    </code>
+                </pre>
+                <div class="border-radius shadow">ドロップシャドウをつける</div>
+                <div class="border-radius shadow-inset">ドロップシャドウをつける</div>
+            </section>
+        </article>
+        <article id="flexbox">
+            <h1>フレキシブルボックスレイアウト</h1>
+            <p>子要素のレイアウト，横幅や高さを自由に調整できる</p>
+            <p>親と子はそれぞれフレックスコンテナ，フレックスアイテムというボックスになる</p>
+            <p>フレックスアイテムは<q>width</q>や<q>height</q>を使用可能</p>
+            <figure class="ex_code flex-box">
+                <figcaption>フレキシブルボックスレイアウトの適用</figcaption>
+                <pre>
+                    <code>
+.flex-container {
+    display: flex;
+}
+                    </code>
+                </pre>
+            </figure>
+            <figure class="ex_result flex-box">
+                <figcaption>フレキシブルボックスレイアウトの適用結果</figcaption>
+                <div class="flex-container">
+                    <div class="box_1">ボックス1</div>
+                    <div class="box_2">ボックス2</div>
+                    <div class="box_3">ボックス3</div>
+                </div>
+            </figure>
+            <nav>
+                <ul>
+                    <li><a href="#flex-basesize">フレックスアイテムのベースサイズ(flex-basis)</a></li>
+                    <li><a href="#flex-grow">フレックスアイテムの伸長比(flex-grow)</a></li>
+                    <li><a href="#flex-shrink">フレックスアイテムの縮小比(flex-shrink)</a></li>
+                    <li><a href="#flex-gap">フレックスアイテムの間隔(gap)</a></li>
+                    <li><a href="#flex-direction">フレックスアイテムを並べる方向(flex-direction)</a></li>
+                    <li><a href="#flex-wrap">フレックスアイテムのマルチライン表示(flex-wrap)</a></li>
+                    <li><a href="#justify-content">主軸の位置揃え(justify-content)</a></li>
+                    <li><a href="#align-items">交差軸の位置揃え(align-items)</a></li>
+                    <li><a href="#flex-conclusion">まとめ</a></li>
+                </ul>
+            </nav>
+            <section id="flex-basesize">
+                <h2>フレックスアイテムのベースサイズ(flex-basis)</h2>
+                <p><code>flex: 伸長比 縮小比 ベースサイズ</code>の形で指定</p>
+                <p>ベースサイズはボックスの横幅</p>
+                <p>ベースサイズの合計がフレックスコンテナより大きい，小さい場合にそれぞれ伸長比，縮小比が適用される</p>
+                <aside id="flex-basesize-detail">
+                    <h3>ベースサイズについて</h3>
+                    <p>flex-basisでベースサイズ単体の値が指定可能</p>
+                    <p>ベースサイズの初期値はautoでコンテンツに合わせた幅で表示</p>
+                </aside>
+                <figure class="ex_code flex-base-size">
+                    <figcaption>ベースサイズコード例</figcaption>
+                    <pre>
+                        <code>
+                            .base-size .box_1 {
+                                flex: 0 0 100px;
+                            }
+                            .base-size .box_2 {
+                                flex: 0 0 200px;
+                            }
+                            .base-size .box_3 {
+                                flex: 0 0 300px;
+                            }
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result flex-base-size">
+                    <figcaption>ベースサイズ例</figcaption>
+                    <div class="flex-base-size-ex">
+                        <div class="flex-container base-size">
+                            <div class="box_1">ボックス1~To make an HTML element behave as a grid container~</div>
+                            <div class="box_2">ボックス2</div>
+                            <div class="box_3">ボックス three</div>
+                        </div>
+                    </div>
+                </figure>
+            </section>
+            <section id="flex-grow">
+                <h2>フレックスアイテムの伸長比(flex-grow)</h2>
+                <p>ベースサイズ合計&lt;フレックスコンテナの横幅の時，ポジティブフリースペースという余白が生まれる</p>
+                <p>伸長比が設定されていると比率によってポジティブがリースペースが配分される</p>
+                <p>初期値は0でベースサイズでの表示となる</p>
+                <p>flex-growで単体の指定が可能</p>
+                <figure class="ex_code flex-grow">
+                    <figcaption>伸長比の例</figcaption>
+                    <pre>
+                        <code>
+.flex-grow .box_1 {
+    flex: 0 0 100px;
+}
+.flex-grow .box_2 {
+    flex: 1 0 100px;
+}
+.flex-grow .box_3 {
+    flex: 2 0 100px;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result flex-grow">
+                    <figcaption>伸長比の例の結果</figcaption>
+                    <div class="flex-container">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="flex-shrink">
+                <h2>フレックスアイテムの縮小比(flex-shrink)</h2>
+                <p>ベースサイズの合計&gt;フレックスコンテナの横幅の場合，ネガティブフリースペースという余剰が生まれる</p>
+                <p>縮小比が設定されていると，比率によってネガティブフリースペースが分割・差し引きされる</p>
+                <p>初期値は0でベースサイズでの表示となる</p>
+                <p>flex-shrinkで単体の指定が可能</p>
+                <figure class="ex_code flex-shrink">
+                    <figcaption>縮小比の例</figcaption>
+                    <pre>
+                        <code>
+.flex-shrink .box_1 {
+    flex: 0 0 400px;
+}
+.flex-shrink .box_2 {
+    flex: 0 1 400px;
+}
+.flex-shrink .box_3 {
+    flex: 0 2 400px;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result flex-shrink">
+                    <figcaption>縮小比の例の結果</figcaption>
+                    <div class="flex-container">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="flex-gap">
+                <h2>フレックスアイテムの間隔(gap)</h2>
+                <p>フレックスアイテムの余白の大きさを決める</p>
+                <p>フレックスアイテムが複数行あるときは縦にも挿入可能</p>
+                <p>縦横の余白はそれぞれrow-gap・column-gapで指定可能</p>
+                <p>gapだけでも縦横指定可能</p>
+                <p>フリースペースの分割を受け取らない</p>
+                <figure class="ex_code flex-gap">
+                    <figcaption>ギャップの例</figcaption>
+                    <pre>
+                        <code>
+.flex-gap > .flex-container {
+    width: 900px;
+    gap: 30px;
+    margin-bottom: 20px;
+    outline: dashed 5px greenyellow;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result flex-gap">
+                    <figcaption>ギャップの例の結果</figcaption>
+                    <div class="flex-container">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="flex-direction">
+                <h2>フレックスアイテムを並べる方向(flex-direction)</h2>
+                <p>軸が変わる</p>
+                <ul>
+                    <li>row</li>
+                    <li>row-reverse</li>
+                    <li>column</li>
+                    <li>column-reverse</li>
+                </ul>
+                <figure class="ex_code flex-direction">
+                    <figcaption>flex-directionの例</figcaption>
+                    <pre>
+                        <code>
+.flex-direction > .flex-container.row {
+    flex-direction: row;
+}
+.flex-direction > .flex-container.row-reverse {
+    flex-direction: row-reverse;
+}
+.flex-direction > .flex-container.column {
+    flex-direction: column;
+}
+.flex-direction > .flex-container.column-reverse {
+    flex-direction: column-reverse;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result flex-direction">
+                    <figcaption>flex-directionの例の結果</figcaption>
+                    <div class="flex-container row">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                    <div class="flex-container row-reverse">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                    <div class="flex-container column">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                    <div class="flex-container column-reverse">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="flex-wrap">
+                <h2>フレックスアイテムをマルチライン表示する(flex-wrap)</h2>
+                <p>フレックスアイテムを複数行にするか指定できる</p>
+                <p>初期値はnowrapで1行表示</p>
+                <p>wrapで複数行表示にできる</p>
+                <ol>
+                    <li>ベースサイズで並べる</li>
+                    <li>溢れたら行を追加して並べる</li>
+                    <li>すべて収まったらフリースペースを算出</li>
+                    <li>各行の伸長比と縮小比の処理を実行</li>
+                </ol>
+                <figure class="ex_code flex-wrap">
+                    <figcaption>マルチライン表示の例</figcaption>
+                    <pre>
+                        <code>
+.flex-wrap > .flex-container {
+    width: 900px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    outline: dashed 5px greenyellow;
+}
+.flex-wrap > .flex-container div {
+    height: 100px;
+}
+
+.flex-wrap .box_1 {
+    flex: 1 0 200px;
+}
+.flex-wrap .box_2 {
+    flex: 1 0 400px;
+}
+.flex-wrap .box_3 {
+    flex: 0 1 1200px;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result flex-wrap">
+                    <figcaption>マルチライン表示の例の結果</figcaption>
+                    <div class="flex-container">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="justify-content">
+                <h2>主軸の位置揃え(justify-content)</h2>
+                <p>フリースペースの使い方として主軸に対してアイテムの位置を調整する役割もある</p>
+                <ul>
+                    <li>flex-start</li>
+                    <li>flex-end</li>
+                    <li>center</li>
+                    <li>space-between</li>
+                    <li>space-around</li>
+                </ul>
+                <figure class="ex_code justify-content">
+                    <figcaption>justify-contentの例</figcaption>
+                    <pre>
+                        <code>
+.justify-content > .flex-container.space-between {
+    justify-content: space-between;
+}
+.justify-content > .flex-container.space-around {
+    justify-content: space-around;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result justify-content">
+                    <figcaption>justify-contentの例の結果</figcaption>
+                    <div class="flex-container space-between">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                    <div class="flex-container space-around">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="align-items">
+                <h2>交差軸の位置揃え(align-items)</h2>
+                <p>交差軸はアイテムのコンテンツで変化する高さの違いによるスペースを活用</p>
+                <p>初期値はstretchで高さが均一</p>
+                <ul>
+                    <li>stretch: 最大値に合わせて高さを均一に</li>
+                    <li>flex-start: 上寄せ</li>
+                    <li>flex-end: 下寄せ</li>
+                    <li>center: 中央寄せ</li>
+                </ul>
+                <p>フレックスアイテムでのalign-selfによって個別指定可能</p>
+                <figure class="ex_code align-items">
+                    <figcaption>align-itemsの例</figcaption>
+                    <pre>
+                        <code>
+.align-items > .flex-container.flex-start {
+    align-items: flex-start;
+}
+.align-items > .flex-container.center {
+    align-items: center;
+}
+                        </code>
+                    </pre>
+                </figure>
+                <figure class="ex_result align-items">
+                    <figcaption>align-itemsの例の結果</figcaption>
+                    <div class="flex-container flex-start">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                    <div class="flex-container center">
+                        <div class="box_1">ボックス1</div>
+                        <div class="box_2">ボックス2</div>
+                        <div class="box_3">ボックス3</div>
+                    </div>
+                </figure>
+            </section>
+            <section id="flex-conclusion">
+                <h2>まとめ</h2>
+                <table class="flex-table">
+                    <caption>flaxboxのプロパティ一覧</caption>
+                    <thead>
+                        <tr>
+                            <th>プロパティ名</th>
+                            <td>コンテナかアイテムか</td>
+                            <td>役割</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>flex</th>
+                            <td>フレックスアイテム</td>
+                            <td>伸長比 縮小比 ベースサイズ</td>
+                        </tr>
+                        <tr>
+                            <th>flex-basis</th>
+                            <td>フレックスアイテム</td>
+                            <td>ベースサイズ</td>
+                        </tr>
+                        <tr>
+                            <th>flex-grow</th>
+                            <td>フレックスアイテム</td>
+                            <td>伸長比</td>
+                        </tr>
+                        <tr>
+                            <th>flex-shrink</th>
+                            <td>フレックスアイテム</td>
+                            <td>縮小比</td>
+                        </tr>
+                        <tr>
+                            <th>gap</th>
+                            <td>フレックスコンテナ</td>
+                            <td>アイテム間の余白</td>
+                        </tr>
+                        <tr>
+                            <th>flex-direction</th>
+                            <td>フレックスコンテナ</td>
+                            <td>主軸の向きを指定</td>
+                        </tr>
+                        <tr>
+                            <th>flex-wrap</th>
+                            <td>フレックスコンテナ</td>
+                            <td>折り返しをするかの指定</td>
+                        </tr>
+                        <tr>
+                            <th>justify-content</th>
+                            <td>フレックスコンテナ</td>
+                            <td>主軸の位置揃え</td>
+                        </tr>
+                        <tr>
+                            <th>align-items</th>
+                            <td>フレックスコンテナ</td>
+                            <td>交差軸の位置揃え</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </article>
+    </main>
+    <footer><small>&copy;2026 ruha321</small></footer>
+</body>
+
+</html>

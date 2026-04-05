@@ -1,0 +1,603 @@
+@charset "UTF-8";
+
+/* ページ全体のスタイル設定 */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: cornsilk;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-navigation {
+    display: flex;
+    flex-wrap: wrap;
+}
+.header-navigation li {
+    display: block;
+    margin: 10px;
+    background-color: antiquewhite;
+    border-radius: 5px;
+}
+.header-navigation a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    padding: 2px 5px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article {
+    width: 33vw;
+    min-width: 480px;
+}
+
+footer {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+span.reminder {
+    font-weight: bold;
+}
+
+/* 以後，例示用style */
+
+/* ::before/::after疑似要素 */
+.center-point::before {
+    content: "・";
+}
+
+/* ボーダー */
+
+.border1 {
+    margin: 40px;
+    border: solid 5px red;
+    background-color: yellow;
+}
+
+.border2 {
+    margin: 40px;
+    border-style: dotted;
+    border-width: 5px;
+    border-color: blue;
+    background-color: yellow;
+}
+
+.border3 {
+    margin: 40px;
+    border-bottom: solid 5px red;
+    background-color: yellow;
+}
+
+/* パディング */
+
+.padding1 {
+    margin: 40px;
+    border: solid 5px red;
+    padding: 40px;
+    background-color: yellow;
+}
+
+.padding2 {
+    margin: 40px;
+    border: solid 5px red;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-left: 60px;
+    background-color: yellow;
+}
+
+/* ボックスの横幅と高さ */
+
+.box-hw {
+    width: 100px;
+    height: 400px;
+    background-color: yellow;
+}
+
+/* ビューポートパーセンテージ */
+
+.vp-percent {
+    width: 30vw;
+    height: 10vh;
+    background-color: yellow;
+}
+
+/* コンテンツの横幅と高さの最大値と最小値 */
+
+.max-width {
+    max-width: 800px;
+    background-color: yellow;
+}
+
+/* block */
+
+span.box {
+    display: block;
+    width: 300px;
+    height: 50px;
+}
+.box_1 {
+    background-color: aqua;
+}
+.box_2 {
+    background-color: yellow;
+}
+.box_3 {
+    background-color: silver;
+}
+
+/* inline */
+
+div.box {
+    display: inline;
+}
+
+/* inline-block */
+
+.box.inline-block {
+    display: inline-block;
+    width: 200px;
+    height: 70px;
+    background-color: aqua;
+}
+
+/* float */
+
+.float.box_1 {
+    float: left;
+    height: 100px;
+    background-color: aqua;
+}
+.float.box_2 {
+    float: left;
+    height: 60px;
+    background-color: yellow;
+}
+.float.box_3 {
+    height: 60px;
+    background-color: silver;
+}
+
+/* positionボックス */
+
+.box.position {
+    height: 50px;
+    background-color: #00ff00;
+    position: relative;
+}
+.box_sub.static {
+    color: #ff0000;
+    position: static;
+    top: 10px;
+    left: 10px;
+}
+.box_sub.relative {
+    color: #ff0000;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+.box_sub.absolute {
+    color: #ff0000;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.box_sub.fixed {
+    color: #ff0000;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+/* z-index */
+
+section#z-index {
+    height: 500px;
+}
+
+.contents {
+    position: relative;
+}
+.contents div {
+    width: 100px;
+    height: 100px;
+}
+.box_1.z-index {
+    position: relative;
+    background-color: aqua;
+}
+.box_2.z-index {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    background-color: yellow;
+}
+.box_3.z-index {
+    position: absolute;
+    left: 60px;
+    top: 60px;
+    background-color: silver;
+}
+.box_1.z-index {
+    z-index: 1;
+}
+
+/* overflow/hidden */
+
+section#overflow {
+    height: 1320px;
+}
+.lipsum {
+    width: 200px;
+    height: 200px;
+    margin-left: 40px;
+    background-color: lime;
+}
+.lipsum.visible {
+    float: left;
+    overflow: visible;
+}
+.lipsum.hidden {
+    float: left;
+    overflow: hidden;
+}
+.lipsum.scroll {
+    float: right;
+    overflow: scroll;
+}
+.lipsum.auto {
+    float: right;
+    overflow: auto;
+}
+
+/* 仮想的なボックスのコンテンツ */
+
+.virtual p::before {
+    content: "・";
+}
+.quote p::before {
+    content: open-quote;
+}
+.quote p::after {
+    content: close-quote;
+}
+div.counter {
+    counter-reset: job;
+}
+.counter p::before {
+    content: counter(job);
+    counter-increment: job;
+}
+
+/* ボックスの不透明度 */
+
+.box_1.opacity {
+    opacity: 1;
+    position: relative;
+}
+.box_2.opacity {
+    opacity: 0.5;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+}
+.box_3.opacity {
+    opacity: 0;
+    position: absolute;
+    left: 60px;
+    top: 60px;
+}
+
+/* マウスカーソルの変更 */
+
+.contents.cursor {
+    display: flex;
+}
+
+.box_4 {
+    background-color: pink;
+}
+.box_5 {
+    background-color: bisque;
+}
+.box_6 {
+    background-color: gold;
+}
+
+.box_1.cursor {
+    cursor: text;
+}
+.box_2.cursor {
+    cursor: pointer;
+}
+.box_3.cursor {
+    cursor: none;
+}
+.box_4.cursor {
+    cursor: wait;
+}
+.box_5.cursor {
+    cursor: not-allowed;
+}
+.box_6.cursor {
+    cursor: default;
+}
+
+/* ボックスのアウトライン */
+
+div.outline {
+    margin: 40px;
+    background-color: yellow;
+    border: solid 5px blue;
+}
+div.outline1 {
+    outline: dotted 5px red;
+}
+div.outline2 {
+    outline-width: 5px;
+    outline-style: solid;
+    outline-color: green;
+}
+
+/* ボックスボーダーの角を丸くする */
+
+.border-radius {
+    border-radius: 20px;
+}
+div.border-radius {
+    margin: 30px;
+    padding: 20px;
+    background-color: yellow;
+}
+
+/* ボックスの角丸を個別に設定する */
+div.border-radius2 {
+    margin: 10px;
+    padding: 20px;
+    background-color: red;
+}
+
+div.border-xxx-xxx-radius {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 40px;
+    background-color: red;
+}
+
+div.border-radius-individual {
+    border-radius: 40px 30px 20px 10px;
+}
+
+/* ボックスのボーダーに影をつける */
+
+.shadow {
+    box-shadow: 20px 20px gray;
+}
+.shadow-inset {
+    box-shadow: 20px 20px gray inset;
+}
+
+/* フレキシブルボックスレイアウト */
+
+.flex-container {
+    display: flex;
+}
+
+/* アイテムテムックスのベースサイズ */
+
+.flex-base-size-ex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.base-size {
+    width: 900px;
+    outline: dashed 5px greenyellow;
+}
+
+.base-size div {
+    height: 100px;
+}
+
+.base-size .box_1 {
+    flex: 0 0 100px;
+}
+.base-size .box_2 {
+    flex: 0 0 200px;
+}
+.base-size .box_3 {
+    flex: 0 0 300px;
+}
+
+/* フレックスアイテムの伸長比 */
+
+.flex-grow > .flex-container {
+    width: 900px;
+    outline: dashed 5px greenyellow;
+}
+.flex-grow > .flex-container div {
+    height: 100px;
+}
+
+.flex-grow .box_1 {
+    flex: 0 0 100px;
+}
+.flex-grow .box_2 {
+    flex: 1 0 100px;
+}
+.flex-grow .box_3 {
+    flex: 2 0 100px;
+}
+
+/* フレックスアイテムの縮小比 */
+
+.flex-shrink > .flex-container {
+    width: 900px;
+    outline: dashed 5px greenyellow;
+}
+.flex-shrink > .flex-container div {
+    height: 100px;
+}
+
+.flex-shrink .box_1 {
+    flex: 0 0 400px;
+}
+.flex-shrink .box_2 {
+    flex: 0 1 400px;
+}
+.flex-shrink .box_3 {
+    flex: 0 2 400px;
+}
+
+/* フレックスアイテムの間隔(gap) */
+
+.flex-gap > .flex-container {
+    width: 900px;
+    gap: 30px;
+    margin-bottom: 20px;
+    outline: dashed 5px greenyellow;
+}
+.flex-gap > .flex-container div {
+    height: 100px;
+}
+
+.flex-gap .box_1 {
+    flex: 0 0 100px;
+}
+.flex-gap .box_2 {
+    flex: 0 0 200px;
+}
+.flex-gap .box_3 {
+    flex: 0 0 300px;
+}
+
+/* フレックスアイテムを並べる方向(flex-direction) */
+
+.flex-direction > .flex-container {
+    width: 900px;
+    height: 900px;
+    outline: dashed 5px greenyellow;
+}
+
+.flex-direction .box_1 {
+    flex: 0 0 100px;
+}
+.flex-direction .box_2 {
+    flex: 0 0 200px;
+}
+.flex-direction .box_3 {
+    flex: 0 0 300px;
+}
+
+.flex-direction > .flex-container.row {
+    flex-direction: row;
+}
+.flex-direction > .flex-container.row-reverse {
+    flex-direction: row-reverse;
+}
+.flex-direction > .flex-container.column {
+    flex-direction: column;
+}
+.flex-direction > .flex-container.column-reverse {
+    flex-direction: column-reverse;
+}
+
+/* フレックスアイテムのマルチライン表示 */
+
+.flex-wrap > .flex-container {
+    width: 900px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    outline: dashed 5px greenyellow;
+}
+.flex-wrap > .flex-container div {
+    height: 100px;
+}
+
+.flex-wrap .box_1 {
+    flex: 1 0 200px;
+}
+.flex-wrap .box_2 {
+    flex: 1 0 400px;
+}
+.flex-wrap .box_3 {
+    flex: 0 1 1200px;
+}
+
+/* 主軸の位置揃え(justify-content) */
+
+.justify-content > .flex-container {
+    width: 1000px;
+    margin-bottom: 20px;
+    outline: dashed 5px greenyellow;
+}
+.justify-content > .flex-container div {
+    width: 300px;
+    height: 100px;
+}
+
+.justify-content > .flex-container.space-between {
+    justify-content: space-between;
+}
+.justify-content > .flex-container.space-around {
+    justify-content: space-around;
+}
+
+/* 交差軸の位置揃え(align-items) */
+
+.align-items > .flex-container {
+    width: 1000px;
+    margin-bottom: 20px;
+    outline: dashed 5px greenyellow;
+}
+.align-items > .flex-container div {
+    width: 300px;
+}
+
+.align-items .box_1 {
+    min-height: 50px;
+}
+.align-items .box_2 {
+    min-height: 100px;
+}
+.align-items .box_3 {
+    min-height: 150px;
+}
+
+.align-items > .flex-container.flex-start {
+    align-items: flex-start;
+}
+.align-items > .flex-container.center {
+    align-items: center;
+}
+
+/* flexbox まとめ */
+
+.flex-table {
+    outline: solid 2px black;
+}
+.flex-table th,
+td {
+    outline: solid 1px black;
+}
+.flex-table .line {
+    outline: solid 3px black;
+}
